@@ -33,8 +33,8 @@ public class FollowMouse : MonoBehaviour {
 
 
 		//if (Input.mousePosition.x > 600 && Input.mousePosition.x < 700 && Input.mousePosition.y > 350  && Input.mousePosition.y < 850) {
-		   Vector3 mousePosition = Input.mousePosition;
-			CheckOnTheTable (Input.mousePosition, g);
+	    Vector3 mousePosition = Input.mousePosition;
+		CheckOnTheTable (Input.mousePosition, g);
 	//
 	}
 
