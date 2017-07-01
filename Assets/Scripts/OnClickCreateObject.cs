@@ -3,28 +3,43 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class OnClickCreateObject : MonoBehaviour {
+
 	public GameObject BaseTower;
 	public GameObject Enemy;
+	public GameObject BaseTower_Trans;
+	public GameObject Enemy_Trans;
 
 	int Counter = 0;
 
 	// Use this for initialization
 	void Start () {
-		
+
+		BaseTower.active = false;
+		Enemy.active = false;
+		Enemy_Trans.active = false;
 	}
 
 
 
 	// Update is called once per frame
 	void Update () {
+
+
 		//base flag 
 
 		if (Counter == 0 && Input.GetMouseButtonDown (0)) {
+			
+			BaseTower.active = true;
+			BaseTower_Trans.active = false;
+
 			PutObject (Input.mousePosition,BaseTower);	
 			//Debug.Log("XXXXXXXXXXXXXX");
 			//PrintMousePosition ();
 			++Counter;
-		}else if (Counter == 1 && Input.GetMouseButtonDown (0)) {
+			Enemy_Trans.active = true;
+
+		}else if (Counter == 1 && Input.GetMouseButtonDown (0)) {//enemy
+
 
 			RaycastHit hit = RayFromCamera(Input.mousePosition, 1000.0f);
 			var TowerPosition = BaseTower.transform.position;
@@ -37,7 +52,9 @@ public class OnClickCreateObject : MonoBehaviour {
 				Debug.Log ("------------->  Buraya Koyulamaz " );
 
 			} else {
-			
+				Enemy_Trans.active = false;
+				Enemy.active = true;
+
 				PutObject (Input.mousePosition,Enemy);
 				++Counter;
 
@@ -68,6 +85,7 @@ public class OnClickCreateObject : MonoBehaviour {
 		Physics.Raycast(ray, out hit, rayLength);
 		return hit;
 	}
+
 
 	void PrintMousePosition(){
 	
