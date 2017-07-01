@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class OnClickCreateObject : MonoBehaviour {
 
@@ -45,10 +46,23 @@ public class OnClickCreateObject : MonoBehaviour {
 			var TowerPosition = BaseTower.transform.position;
 
 
-			var Distance = Vector3.Distance (BaseTower.transform.position, hit.point);
+		//	var Distance = Vector3.Distance (BaseTower.transform.position, hit.point);
 			//Distance check part
-			Debug.Log ("------------->  " + Distance);
-			if (Distance > 1.43) {
+
+
+			Vector3 difference = new Vector3(
+				BaseTower.transform.position.x - hit.point.x,
+				BaseTower.transform.position.y - hit.point.y,
+				BaseTower.transform.position.z - hit.point.z);
+
+
+			Double distance = Math.Sqrt(
+				Math.Pow(difference.x, 2f) +
+				Math.Pow(difference.y, 2f) +
+				Math.Pow(difference.z, 2f));
+			
+			Debug.Log ("------------->  " + distance);
+			if (distance < 1.05) {
 				Debug.Log ("------------->  Buraya Koyulamaz " );
 
 			} else {
