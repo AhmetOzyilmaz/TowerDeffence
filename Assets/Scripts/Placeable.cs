@@ -23,10 +23,13 @@ public class Placeable : MonoBehaviour {
 
 	public bool isDistanceCheck(List<Vector3> positionList){
 
-		if(positionList.Count == 0)
+		Debug.Log("Gelen list " + positionList.Count);
+
+		if( positionList.Count == 0)
         	positionList.Add( Cursor3D.instance.PositionOnTable);
 
-		for(int i = 1 ; i < (positionList.Count); ++i){
+		for(int i = 0 ; i < (positionList.Count); ++i){
+
 			if(!DistanceCheckWith2Objects(positionList[i],Cursor3D.instance.PositionOnTable,0.3)){
 				return false;
 			}

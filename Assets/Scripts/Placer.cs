@@ -5,10 +5,11 @@ using UnityEngine;
 public class Placer : MonoBehaviour {
 	private int index = 0;
 	private bool flag = true;
-
+	
+	[HideInInspector]
 	public Placeable placeable;
 	
-    public List<Vector3> positionList;
+    public  List<Vector3> positionList;
 
 	public Vector3 LastPosition;
 
@@ -50,21 +51,38 @@ public class Placer : MonoBehaviour {
 	// mouse click ettiğinde sıradaki yerleştirilcek objeyi masaüstündeyse yerleştirir.
 	void Place(){
 		if(placeable != null) {
-			if( Cursor3D.instance.IsOnTable ) {								
-				flag= placeable.isDistanceCheck(positionList);
-				//LastPosition = Cursor3D.instance.PositionOnTable;
-				//Debug.Log("+++ " + positionList.Count);
-				//Debug.Log("*** " + positionList[index]);
-				++index;
+			if( Cursor3D.instance.IsOnTable ) {
 
-				if(flag){
+				if(positionList.Count != 0){							
+					flag= placeable.isDistanceCheck(positionList);
+					//LastPosition = Cursor3D.instance.PositionOnTable;
+					//Debug.Log("+++ " + positionList.Count);
+					//Debug.Log("*** " + positionList[index]);
+					print("distance " + flag);
+
+					++index;
+
+					if(flag){
+						placeable.transform.position= Cursor3D.instance.PositionOnTable;
+						positionList.Add( Cursor3D.instance.PositionOnTable);
+						placeable.placerModel.SetActive(false);
+						placeable.placedModel.SetActive(true);
+						placeable= null;
+					}else{
+
+						//if( Input.GetMouseButtonDown(0)) {
+						//	Place();
+
+						//}
+					}
+				
+				}
+				else{
 					placeable.transform.position= Cursor3D.instance.PositionOnTable;
 					positionList.Add( Cursor3D.instance.PositionOnTable);
 					placeable.placerModel.SetActive(false);
 					placeable.placedModel.SetActive(true);
 					placeable= null;
-				}else{
-					flag = true;
 				}
 
 			}

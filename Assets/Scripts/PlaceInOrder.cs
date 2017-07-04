@@ -9,7 +9,6 @@ public class PlaceInOrder : MonoBehaviour {
 
 	public List<Placeable> placeables;
 
-
 	// Use this for initialization
 	void Start () {
 		foreach( Placeable p in placeables ) {
