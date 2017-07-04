@@ -29,15 +29,19 @@ public class Menu3D : MonoBehaviour {
 			var num = WhichMenuElementClicked();
 			print("--->" +num);
 			if(num == 1){
-				placer.placeable= placeables[0];
+				
+				Placeable p = Instantiate(placeables[0]);
+				placer.placeable= p;
 				placer.Place();
 				
 			}else if(num == 2){
-				placer.placeable= placeables[2];
+				Placeable p = Instantiate(placeables[2]);
+				placer.placeable= p;
 				placer.Place();
 				
 			}else if(num == 3){
-				placer.placeable= placeables[1];
+				Placeable p = Instantiate(placeables[1]);
+				placer.placeable= p;
 				placer.Place();
 				
 			}
