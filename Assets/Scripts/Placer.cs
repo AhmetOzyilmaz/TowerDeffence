@@ -12,7 +12,6 @@ public class Placer : MonoBehaviour {
 
 	public Vector3 LastPosition;
 
-	public Distance dist;
 
 	// Use this for initialization
 	void Start () {
@@ -52,34 +51,21 @@ public class Placer : MonoBehaviour {
 	void Place(){
 		if(placeable != null) {
 			if( Cursor3D.instance.IsOnTable ) {								
-
+				flag= placeable.isDistanceCheck(positionList);
 				//LastPosition = Cursor3D.instance.PositionOnTable;
-             /*   positionList.Add( Cursor3D.instance.PositionOnTable);
-
-				Debug.Log("+++ " + positionList.Count);
-				Debug.Log("*** " + positionList[index]);
+				//Debug.Log("+++ " + positionList.Count);
+				//Debug.Log("*** " + positionList[index]);
 				++index;
-*/
-			/*	for(int i = 0 ; i < (positionList.Count-1); ++i){
-				  if(positionList.Count>=2){
-					if(!dist.DistanceCheckWith2Objects(positionList[0],positionList[i],0.4)){
-						flag = false;
-					}
-						float distance = Vector3.Distance(positionList[i],positionList[i+1]);
-						print("Distance to other: " + distance);
-			
-					
-					}
-				}
-				if(flag){*/
+
+				if(flag){
 					placeable.transform.position= Cursor3D.instance.PositionOnTable;
+					positionList.Add( Cursor3D.instance.PositionOnTable);
 					placeable.placerModel.SetActive(false);
 					placeable.placedModel.SetActive(true);
 					placeable= null;
-				/*}else{
+				}else{
 					flag = true;
-
-				}*/
+				}
 
 			}
 		}
