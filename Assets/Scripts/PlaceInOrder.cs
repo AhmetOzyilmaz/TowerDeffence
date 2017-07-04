@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class PlaceInOrder : MonoBehaviour {
 
+	public int index = 0 ;
 	public Placer placer;
 
 	public List<Placeable> placeables;
+
 
 	// Use this for initialization
 	void Start () {
@@ -18,18 +20,33 @@ public class PlaceInOrder : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if( placer.placeable == null ) {
+	
 			Placeable p= NextPlaceable();
+			if(p!=null) {
+				if(placeables.Count>index)
+			   		++index;
+				placer.placeable= p;
 
-			if(p!=null) placer.placeable= p;
+				//for(int i = 0; i < i+1;++i){
+					//if(!dist.DistanceCheckWith2Objects(placeables[i].transform.position,placeables[i+1].transform.position,1))
+					//	flag = false;
+
+			//	if(index >= 1 &&  placeables.Count>index){
+					//Debug.Log(dist.FindDistance(placeables[0].placerModel.transform.position,placeables[1].placerModel.transform.position));
+					//Debug.Log(placeables[1].transform.position);
+			}
+					
+			
 		}
 	}
 
 	Placeable NextPlaceable() {
-		if( placeables.Count > 0 ) {
-			Placeable p= placeables[0];
-			placeables.Remove(p);
+		if( placeables.Count > index ) {
+			Placeable p= placeables[index];
+			//placeables.Remove(p);
 			return p;
 		}
 		return null;
 	}
 }
+
