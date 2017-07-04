@@ -6,7 +6,6 @@ public class Placer : MonoBehaviour {
 	private int index = 0;
 	private bool flag = true;
 	
-	[HideInInspector]
 	public Placeable placeable;
 	
     public  List<Vector3> positionList;
@@ -49,7 +48,7 @@ public class Placer : MonoBehaviour {
 	}
 
 	// mouse click ettiğinde sıradaki yerleştirilcek objeyi masaüstündeyse yerleştirir.
-	void Place(){
+	public void Place(){
 		if(placeable != null) {
 			if( Cursor3D.instance.IsOnTable ) {
 

@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Menu3D : MonoBehaviour {
+	
+	public List<Placeable> placeables;
 
 	public GameObject archer;
 	public GameObject mortar;
 	public GameObject cannon;
 
-//	public Placer placer;
+	public Placer placer;
 
 	private int ClickedButtonId ;
 
@@ -16,7 +18,9 @@ public class Menu3D : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+		foreach( Placeable p in placeables ) {
+			p.HideAll();
+		}
 	}
 	
 	// Update is called once per frame
@@ -25,9 +29,17 @@ public class Menu3D : MonoBehaviour {
 			var num = WhichMenuElementClicked();
 			print("--->" +num);
 			if(num == 1){
-				//placer.Place();
-			}else{
-
+				placer.placeable= placeables[0];
+				placer.Place();
+				
+			}else if(num == 2){
+				placer.placeable= placeables[2];
+				placer.Place();
+				
+			}else if(num == 3){
+				placer.placeable= placeables[1];
+				placer.Place();
+				
 			}
 
 
