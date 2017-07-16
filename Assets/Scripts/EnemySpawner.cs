@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour {
 
-	public bool stop;
+    public bool stop;
 	public GameObject Enemy;
 
 	public float spawnRate= 1.0f;
@@ -21,14 +21,16 @@ public class EnemySpawner : MonoBehaviour {
 	void Update () {
 		timeLeftToSpawn-= Time.deltaTime;
 		if(timeLeftToSpawn < 0 && !stop) {
-			Spawn();
-			timeLeftToSpawn= spawnRate;
+            Spawn();
+            timeLeftToSpawn = spawnRate;
 		}
 	}
+    
 
 	void Spawn(){
-		GameObject enemyObject=  Instantiate(Enemy) as GameObject;
+		GameObject enemyObject= Instantiate(Enemy) as GameObject;		
 		enemyObject.transform.position= transform.position;
-
 	}
+
+
 }

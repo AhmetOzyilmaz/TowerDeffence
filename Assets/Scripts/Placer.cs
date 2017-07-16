@@ -57,7 +57,7 @@ public class Placer : MonoBehaviour {
 					//LastPosition = Cursor3D.instance.PositionOnTable;
 					//Debug.Log("+++ " + positionList.Count);
 					//Debug.Log("*** " + positionList[index]);
-					print("distance " + flag);
+					//print("distance " + flag);
 
 					++index;
 

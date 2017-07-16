@@ -17,13 +17,15 @@ public class Placeable : MonoBehaviour {
 	}
 
 	public void HideAll(){
-		placerModel.SetActive(false);
-		placedModel.SetActive(false);
+        if (placerModel.active == true)
+            placerModel.SetActive(false);
+        if(placedModel.active == true)
+		    placedModel.SetActive(false);
 	}
 
 	public bool isDistanceCheck(List<Vector3> positionList){
 
-		Debug.Log("Gelen list " + positionList.Count);
+		//Debug.Log("Gelen list " + positionList.Count);
 
 		if( positionList.Count == 0)
         	positionList.Add( Cursor3D.instance.PositionOnTable);
@@ -35,7 +37,7 @@ public class Placeable : MonoBehaviour {
 			}
 
 			float distance = Vector3.Distance(positionList[i],Cursor3D.instance.PositionOnTable);
-			print("Distance to other: " + distance);
+			//print("Distance to other: " + distance);
 
 		}
 		return true;

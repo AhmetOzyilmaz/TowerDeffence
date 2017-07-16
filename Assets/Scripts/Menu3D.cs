@@ -28,8 +28,7 @@ public class Menu3D : MonoBehaviour {
 		if( Input.GetMouseButtonDown(0)) {
 			var num = WhichMenuElementClicked();
 			print("--->" +num);
-			if(num == 1){
-				
+			if(num == 1){	
 				Placeable p = Instantiate(placeables[0]);
 				placer.placeable= p;
 				placer.Place();
@@ -43,7 +42,6 @@ public class Menu3D : MonoBehaviour {
 				Placeable p = Instantiate(placeables[1]);
 				placer.placeable= p;
 				placer.Place();
-				
 			}
 
 
@@ -53,7 +51,7 @@ public class Menu3D : MonoBehaviour {
 
 		RaycastHit hit;
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-		if ( Physics.Raycast(ray, out hit, Mathf.Infinity, layer.value )) {
+		if ( Physics.Raycast(ray, out hit, Mathf.Infinity)) {
 			if (hit.collider!=null &&  hit.collider.tag == "archer") {
 				//PositionOnTable= hit.point;
 				return 1;
