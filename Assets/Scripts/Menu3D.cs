@@ -6,15 +6,12 @@ public class Menu3D : MonoBehaviour {
 	
 	public List<Placeable> placeables;
 
-	public GameObject archer;
-	public GameObject mortar;
-	public GameObject cannon;
 
-	public Placer placer;
+	//public Placer placer;
 
-	private int ClickedButtonId ;
+	//private int ClickedButtonId ;
 
-	public LayerMask layer;
+	//public LayerMask layer;
 
 	// Use this for initialization
 	void Start () {
@@ -26,46 +23,10 @@ public class Menu3D : MonoBehaviour {
 	// Update is called once per frame
 	void LateUpdate () {
 		if( Input.GetMouseButtonDown(0)) {
-			var num = WhichMenuElementClicked();
-			print("--->" +num);
-			if(num == 1){	
-				Placeable p = Instantiate(placeables[0]);
-				placer.placeable= p;
-				placer.Place();
+            //var num = WhichMenuElementClicked();
+
+            //Placeable p = Instantiate(placeables[0]);
 				
-			}else if(num == 2){
-				Placeable p = Instantiate(placeables[2]);
-				placer.placeable= p;
-				placer.Place();
-				
-			}else if(num == 3){
-				Placeable p = Instantiate(placeables[1]);
-				placer.placeable= p;
-				placer.Place();
-			}
-
-
 		}
-	}
-	public int WhichMenuElementClicked(){
-
-		RaycastHit hit;
-		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-		if ( Physics.Raycast(ray, out hit, Mathf.Infinity)) {
-			if (hit.collider!=null &&  hit.collider.tag == "archer") {
-				//PositionOnTable= hit.point;
-				return 1;
-			}
-			else if (hit.collider!=null &&  hit.collider.tag == "cannon") {
-							//PositionOnTable= hit.point;
-				return 2;
-			}
-			else if (hit.collider!=null &&  hit.collider.tag == "mortar") {
-							//PositionOnTable= hit.point;
-				return 3;
-			}		
-		}
-
-		return 0;
 	}
 }

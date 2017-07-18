@@ -21,10 +21,10 @@ public class Placer : MonoBehaviour {
 	// Update is called once per frame
 	void LateUpdate () {
 		UpdatePlaceablePosition();
+        UpdatePositionList();
 
-		if( Input.GetMouseButtonDown(0)) {
-			Place();
-
+        if ( Input.GetMouseButtonDown(0)) {
+            Place();
 		}
 	}
 
@@ -46,20 +46,41 @@ public class Placer : MonoBehaviour {
 			}
 		}
 	}
+    public void UpdatePositionList() {
+      /*  bool flag = false;
+        foreach (Vector3 pos in positionList) {
 
-	// mouse click ettiğinde sıradaki yerleştirilcek objeyi masaüstündeyse yerleştirir.
-	public void Place(){
+            var hitColliders = Physics.OverlapSphere(pos, 0.05f);//1 is purely chosen arbitrarly
+            Debug.Log("UPDATE FUCK2 " + hitColliders.Length);
+
+            if (hitColliders.Length > 0) //You have someone with a collider here
+                flag = true;
+            else
+                flag = false;
+            
+            if (flag == false)
+            {
+                positionList.Remove(pos);
+                --index;
+            }
+        }
+        Debug.Log("UPDATE FUCK " + positionList.Count);*/
+
+    }
+    // mouse click ettiğinde sıradaki yerleştirilcek objeyi masaüstündeyse yerleştirir.
+    public void Place(){
+
+        
 		if(placeable != null) {
 			if( Cursor3D.instance.IsOnTable ) {
 
-				if(positionList.Count != 0){							
+				if(positionList.Count > 0){							
 					flag= placeable.isDistanceCheck(positionList);
 					//LastPosition = Cursor3D.instance.PositionOnTable;
-					//Debug.Log("+++ " + positionList.Count);
-					//Debug.Log("*** " + positionList[index]);
+					Debug.Log("+++ " + positionList.Count);
+					Debug.Log("*** " + positionList[index]);
 					//print("distance " + flag);
 
-					++index;
 
 					if(flag){
 						placeable.transform.position= Cursor3D.instance.PositionOnTable;
@@ -67,7 +88,12 @@ public class Placer : MonoBehaviour {
 						placeable.placerModel.SetActive(false);
 						placeable.placedModel.SetActive(true);
 						placeable= null;
-					}else{
+
+                        ++index;
+
+                    }
+                    else
+                    {
 
 						//if( Input.GetMouseButtonDown(0)) {
 						//	Place();
@@ -76,13 +102,15 @@ public class Placer : MonoBehaviour {
 					}
 				
 				}
-				else{
+				else if(positionList.Count == 0){
 					placeable.transform.position= Cursor3D.instance.PositionOnTable;
 					positionList.Add( Cursor3D.instance.PositionOnTable);
 					placeable.placerModel.SetActive(false);
 					placeable.placedModel.SetActive(true);
 					placeable= null;
-				}
+                    index = 0;
+
+                }
 
 			}
 		}
