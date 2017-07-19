@@ -25,21 +25,39 @@ public class Placeable : MonoBehaviour {
 
 	public bool isDistanceCheck(List<Vector3> positionList){
 
-		//Debug.Log("Gelen list " + positionList.Count);
+        //Debug.Log("Gelen list " + positionList.Count);
 
-		if( positionList.Count == 0)
-        	positionList.Add( Cursor3D.instance.PositionOnTable);
+        if (positionList.Count == 0)
+            positionList.Add(Cursor3D.instance.PositionOnTable);
+        else
+        {
+            if (positionList.Count > 1)//enemy tower yerleştirildikten sonra 
+            {
+                var hitColliders = Physics.OverlapSphere(positionList[1], 0.1f);//1 is purely chosen arbitrarly
+                positionList = new List<Vector3>();
 
-		for(int i = 0 ; i < (positionList.Count); ++i){
+                foreach (var pos in hitColliders)
+                {
+                    positionList.Add(pos.transform.position);
+                }
+            }
+           
+          
+            for (int i = 0; i < (positionList.Count); ++i)
+            {
 
-			if(!DistanceCheckWith2Objects(positionList[i],Cursor3D.instance.PositionOnTable,0.3)){
-				return false;
-			}
+                if (!DistanceCheckWith2Objects(positionList[i], Cursor3D.instance.PositionOnTable, 0.3))
+                {
+                    return false;
+                }
 
-			float distance = Vector3.Distance(positionList[i],Cursor3D.instance.PositionOnTable);
-			//print("Distance to other: " + distance);
+                float distance = Vector3.Distance(positionList[i], Cursor3D.instance.PositionOnTable);
+                //print("Distance to other: " + distance);
 
-		}
+            }
+
+        }
+		
 		return true;
 	}
 

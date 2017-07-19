@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Placer : MonoBehaviour {
-	private int index = 0;
 	private bool flag = true;
 	
 	public Placeable placeable;
@@ -47,25 +46,8 @@ public class Placer : MonoBehaviour {
 		}
 	}
     public void UpdatePositionList() {
-      /*  bool flag = false;
-        foreach (Vector3 pos in positionList) {
 
-            var hitColliders = Physics.OverlapSphere(pos, 0.05f);//1 is purely chosen arbitrarly
-            Debug.Log("UPDATE FUCK2 " + hitColliders.Length);
-
-            if (hitColliders.Length > 0) //You have someone with a collider here
-                flag = true;
-            else
-                flag = false;
-            
-            if (flag == false)
-            {
-                positionList.Remove(pos);
-                --index;
-            }
-        }
-        Debug.Log("UPDATE FUCK " + positionList.Count);*/
-
+     
     }
     // mouse click ettiğinde sıradaki yerleştirilcek objeyi masaüstündeyse yerleştirir.
     public void Place(){
@@ -77,8 +59,6 @@ public class Placer : MonoBehaviour {
 				if(positionList.Count > 0){							
 					flag= placeable.isDistanceCheck(positionList);
 					//LastPosition = Cursor3D.instance.PositionOnTable;
-					Debug.Log("+++ " + positionList.Count);
-					Debug.Log("*** " + positionList[index]);
 					//print("distance " + flag);
 
 
@@ -89,7 +69,6 @@ public class Placer : MonoBehaviour {
 						placeable.placedModel.SetActive(true);
 						placeable= null;
 
-                        ++index;
 
                     }
                     else
@@ -108,7 +87,6 @@ public class Placer : MonoBehaviour {
 					placeable.placerModel.SetActive(false);
 					placeable.placedModel.SetActive(true);
 					placeable= null;
-                    index = 0;
 
                 }
 
