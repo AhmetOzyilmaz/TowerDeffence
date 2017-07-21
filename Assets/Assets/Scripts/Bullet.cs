@@ -1,41 +1,71 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Bullet : MonoBehaviour {
+    EnemySoldier target;
 
+    public float speed = 1.0f;
+    public int damage = 1;
 
-    private Transform target;
-
-    public float speed = 70f;
-    public void Seek(Transform _target)
+    private void Update()
     {
-        target = _target;
-    }
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (target == null) {
-            Destroy(gameObject);
-            return;
+        if (target)
+        {
+            MoveTowardsTarget();
         }
-        Vector3 dir = target.position - transform.position;
-        float distanceThisFrame = speed * Time.deltaTime;
-
-        if (dir.magnitude <= distanceThisFrame) {
-            HitTarget();
-            return;
+        else
+        {
+            FindTarget();
         }
-        transform.Translate(dir.normalized * distanceThisFrame,Space.World);
+    }
+
+    void FindTarget()
+    {
+        target = null;
+
+        EnemySoldier[] zombies = FindObjectsOfType<EnemySoldier>();
+            
+        float closestDist = Mathf.Infinity;
+        EnemySoldier closest = null;
+        foreach (EnemySoldier b in zombies)
+        {
+            float dist = Vector3.Distance(transform.position, b.transform.position);
+            if (dist < closestDist)
+            {
+                closest = b;
+                closestDist = dist;
+            }
+        }
+
+        target = closest;
+    }
+
+    void MoveTowardsTarget()
+    {
+        if (!target)
+            return;
+
+        float y = transform.position.y;
+        Vector3 nextposition = Vector3.MoveTowards(transform.position, target.transform.position, speed * (Time.deltaTime / 2));
+        nextposition.y = y;
+        transform.position = nextposition;
+
+        Vector3 distCheckPos = transform.position;
+        distCheckPos.y = target.transform.position.y;
+        if (Vector3.Distance(distCheckPos, target.transform.position) < 0.01f)
+        {
+             ExplodeOnTarget();
+        }
+    }
+
+    void ExplodeOnTarget()
+    {
+        if (!target)
+            return;
+
+        target.TakeDamage(damage);
+       // Destroy(gameObject);
+        gameObject.active = false;
 
     }
-    void HitTarget() {
-        Debug.Log("Hitted Sometyihng");
-    }
+
 }

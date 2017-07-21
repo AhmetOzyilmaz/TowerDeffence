@@ -41,7 +41,7 @@ public class Zombie : MonoBehaviour {
             return;
 
         float y = transform.position.y;
-        Vector3 nextposition = Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
+        Vector3 nextposition = Vector3.MoveTowards(transform.position, target.transform.position, speed * (Time.deltaTime/2));
         nextposition.y = y;
         transform.position = nextposition;
 

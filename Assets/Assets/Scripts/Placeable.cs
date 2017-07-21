@@ -42,16 +42,14 @@ public class Placeable : MonoBehaviour {
                 }
             }
            
-          
             for (int i = 0; i < (positionList.Count); ++i)
             {
 
-                if (!DistanceCheckWith2Objects(positionList[i], Cursor3D.instance.PositionOnTable, 0.3))
-                {
+                if (!DistanceCheckWith2Objects(positionList[i], Cursor3D.instance.PositionOnTable, 0.2))    
                     return false;
-                }
 
-                float distance = Vector3.Distance(positionList[i], Cursor3D.instance.PositionOnTable);
+
+                //float distance = Vector3.Distance(positionList[i], Cursor3D.instance.PositionOnTable);
                 //print("Distance to other: " + distance);
 
             }

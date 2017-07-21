@@ -28,8 +28,12 @@ public class EnemySpawner : MonoBehaviour {
     
 
 	void Spawn(){
-		GameObject enemyObject= Instantiate(Enemy) as GameObject;		
-		enemyObject.transform.position= transform.position;
+
+        
+        GameObject enemyObject = Instantiate(Enemy) as GameObject;
+        enemyObject.transform.position = transform.position;
+
+        
 	}
 
 
