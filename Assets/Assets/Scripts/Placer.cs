@@ -51,9 +51,9 @@ public class Placer : MonoBehaviour {
     }
     // mouse click ettiğinde sıradaki yerleştirilcek objeyi masaüstündeyse yerleştirir.
     public void Place(){
+       
 
-        
-		if(placeable != null) {
+        if (placeable != null) {
 			if( Cursor3D.instance.IsOnTable ) {
 
 				if(positionList.Count > 0){							
@@ -64,7 +64,8 @@ public class Placer : MonoBehaviour {
 
 					if(flag){
 						placeable.transform.position= Cursor3D.instance.PositionOnTable;
-						positionList.Add( Cursor3D.instance.PositionOnTable);
+
+                        positionList.Add( Cursor3D.instance.PositionOnTable);
 						placeable.placerModel.SetActive(false);
 						placeable.placedModel.SetActive(true);
 						placeable= null;

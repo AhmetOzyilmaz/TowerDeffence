@@ -22,16 +22,16 @@ public class Bullet : MonoBehaviour {
     {
         target = null;
 
-        EnemySoldier[] zombies = FindObjectsOfType<EnemySoldier>();
+        EnemySoldier[] enmySol = FindObjectsOfType<EnemySoldier>();
             
         float closestDist = Mathf.Infinity;
         EnemySoldier closest = null;
-        foreach (EnemySoldier b in zombies)
+        foreach (EnemySoldier ES in enmySol)
         {
-            float dist = Vector3.Distance(transform.position, b.transform.position);
+            float dist = Vector3.Distance(transform.position, ES.transform.position);
             if (dist < closestDist)
             {
-                closest = b;
+                closest = ES;
                 closestDist = dist;
             }
         }
