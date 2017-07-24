@@ -36,7 +36,7 @@ public class Spawner : MonoBehaviour {
         EnemySoldier[] zombies = FindObjectsOfType<EnemySoldier>();
         Bullet[] ball = FindObjectsOfType<Bullet>();
 
-        if (zombies.Length > 0 && ball.Length< 2)
+        if (zombies.Length > 0)
         {
             Copy = Instantiate(Enemy, transform.position, transform.rotation) as GameObject;
             Copy.active = true;
