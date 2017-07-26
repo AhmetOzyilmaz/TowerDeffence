@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour {
 
-    public bool stop;
     public GameObject Enemy;
     private GameObject Copy;
 
@@ -23,7 +22,7 @@ public class Spawner : MonoBehaviour {
     void Update()
     {
         timeLeftToSpawn -= Time.deltaTime;
-        if (timeLeftToSpawn < 0 && !stop)
+        if (timeLeftToSpawn < 0 )
         {
             Spawn();
             timeLeftToSpawn = spawnRate;
@@ -34,7 +33,6 @@ public class Spawner : MonoBehaviour {
     void Spawn()
     {
         EnemySoldier[] zombies = FindObjectsOfType<EnemySoldier>();
-        Bullet[] ball = FindObjectsOfType<Bullet>();
 
         if (zombies.Length > 0)
         {
