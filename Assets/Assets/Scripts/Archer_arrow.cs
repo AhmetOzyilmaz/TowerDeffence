@@ -1,14 +1,15 @@
 ﻿using UnityEngine;
 
 public class Archer_arrow : MonoBehaviour {
-
     EnemySoldier target;
-
     public float speed = 1.0f;
     public int damage = 1;
+    Rigidbody2D projectile;
 
-    float p = 0.0f;
-
+    private void Start()
+    {
+        transform.Rotate(90, 0,0);
+    }
     private void Update()
     {
         if (target)
@@ -53,53 +54,12 @@ public class Archer_arrow : MonoBehaviour {
 
     void Arrow_Movement()
     {
-        /*not running part
-         * 
-         * Vector3.MoveTowards(transform.position, target.transform.position, speed * (Time.fixedDeltaTime) / 2);
-
-        float deltaX = speed * Time.deltaTime;
-        float deltaP = deltaX / Vector3.Distance(target.transform.position, transform.position);
-
-        p+= speed * Time.deltaTime / Vector3.Distance(transform.position, target.transform.position);
-
-        if (p < 1)
-        {
-            Vector3 linedP = transform.position + Vector3.Normalize(target.transform.position - transform.position) * p;
-            float  x = Mathf.Sin(p) / 5;
-            Vector3 linedPnot = linedP;
-
-            linedPnot.y += x;
-            transform.position = linedPnot;
-        }
-        */
-
-        /* old running version 
-         * */
-
-        FindTarget();
-
-        float distance = (Vector3.Distance(transform.position, target.transform.position));
-        Debug.Log("target ->" + (target.transform.position) + "Time Delta " + Time.deltaTime);
-
-
-        float y = transform.position.y;
-        Vector3 nextposition = Vector3.MoveTowards(transform.position, target.transform.position, speed * (Time.fixedDeltaTime) / 2);
-        //Vector3 nextposition = transform.position + Mathf.Sin(speed * (Time.deltaTime / 2) / 5;
-
-        float SinValue = Mathf.Sin(Time.deltaTime / 2);
-
-        if (SinValue < 0)
-        {
-            SinValue *= -1;
-        }
-        nextposition.y = y + (SinValue * Time.deltaTime);
-       // Debug.Log("SIN ->" + (SinValue) + "Time Delta " + Time.deltaTime);
-        transform.position = nextposition;
         
-
-
+        Vector3 moveDir = (target.transform.position - transform.position).normalized;
+        moveDir.y += Mathf.Sin(45 * (Mathf.PI / 180)) / 2;
+        transform.position += moveDir * speed * Time.deltaTime;
     }
-        
+
     void Distance_Check()
     {
         Vector3 distCheckPos = transform.position;

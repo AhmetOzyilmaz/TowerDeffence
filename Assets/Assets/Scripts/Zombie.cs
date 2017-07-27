@@ -9,6 +9,10 @@ public class Zombie : MonoBehaviour {
     public float speed= 1.0f;
     public int damage = 1;
 
+    private void Start()
+    {
+
+    }
     private void Update() {
         if( target ) {
             MoveTowardsTarget();
@@ -34,12 +38,13 @@ public class Zombie : MonoBehaviour {
         }
 
         target = closest;
+        Vector3 moveDir = (target.transform.position - transform.position).normalized;
+        transform.Rotate(0, 45 * moveDir.y, 0);
     }
 
     void MoveTowardsTarget() {
         if (!target)
             return;
-
         float y = transform.position.y;
         Vector3 nextposition = Vector3.MoveTowards(transform.position, target.transform.position, speed * (Time.deltaTime/2));
         nextposition.y = y;
