@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 public class Bullet : MonoBehaviour {
-    public EnemySoldier target;
+    EnemySoldier target;
 
     public float speed = 1.0f;
     public int damage = 1;
